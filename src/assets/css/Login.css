@@ -45,10 +45,11 @@
   }
   
   .card {
-    background-color: rgba(255, 255, 255, 0.3); /* Nền trong suốt */
+    background-color: rgba(255, 255, 255, 0.3) !important; 
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px ;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tạo bóng nhẹ cho card */
     width: 400px; /* Đặt chiều rộng cho card */
+    height: 400px;
   }
   

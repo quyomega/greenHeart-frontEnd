@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../assets/css/Login.css';  // Import CSS
+import '../assets/css/Login.css';  
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -39,7 +39,6 @@ function Login() {
 
   return (
     <div className="login-container">
-      {/* Slogan bên trái */}
       <div className="login-left">
         <div className="slogan">
           <p>Trái tim xanh</p>
@@ -48,7 +47,6 @@ function Login() {
         </div>
       </div>
       
-      {/* Form đăng nhập bên phải */}
       <div className="login-right">
         <div className="card shadow-sm p-4">
           <h2 className="text-center mb-4">Đăng nhập</h2>
