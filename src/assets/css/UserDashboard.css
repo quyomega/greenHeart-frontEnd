@@ -1,4 +1,3 @@
-
 .dashboard-container {
   display: flex;
   flex-direction: column;
@@ -114,7 +113,14 @@
   border-radius: 10px;
   height: 14rem;
 }
-
+.userAction{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  height: 14rem;
+  max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của khối */
+  overflow-x: auto;
+}
 .dashboard-main.sidebar-collapsed {
   margin-left: 60px;
   border-radius: 10px;
