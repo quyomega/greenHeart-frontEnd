@@ -5,32 +5,76 @@ import "../assets/css/UserDashboard.css";
 
 function UserDashboard() {
   const [userData, setUserData] = useState(null);
+  const [activities, setActivities] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [dateList, setDateList] = useState([]);
+  const [totalPoints, setTotalPoints] = useState(0);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(true);
   const navigate = useNavigate(); // Hook điều hướng
 
-  // Gọi API để lấy thông tin người dùng
+  // Gọi API để lấy thông tin người dùng và hoạt động
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://localhost:5000/api/users/profile",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const token = localStorage.getItem('token');
+        const response = await axios.get('http://localhost:5000/api/users/profile', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUserData(response.data);
       } catch (error) {
-        console.error("Lỗi khi lấy thông tin người dùng:", error);
-        alert("Không thể tải thông tin. Vui lòng đăng nhập lại.");
+        console.error('Lỗi khi lấy thông tin người dùng:', error);
+        alert('Không thể tải thông tin. Vui lòng đăng nhập lại.');
       }
     };
+
+    const fetchActivities = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          alert('Vui lòng đăng nhập lại');
+          window.location.href = '/login'; // Đưa người dùng quay lại trang đăng nhập
+          return;
+        }
+        const response = await axios.get('http://localhost:5000/api/activities', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log(response.data); // Kiểm tra dữ liệu trả về từ server
+        setActivities(response.data);
+
+        // Lấy danh sách ngày duy nhất từ các hoạt động
+        const uniqueDates = [
+          ...new Set(response.data.map(activity => new Date(activity.date).toLocaleDateString()))
+        ];
+        setDateList(uniqueDates);
+      } catch (error) {
+        console.error('Lỗi khi lấy danh sách hoạt động:', error);
+      }
+    };
+
     fetchUserData();
+    fetchActivities();
   }, []);
+
+  // Lọc các hoạt động theo ngày được chọn
+  const filterActivitiesByDate = (date) => {
+    const filteredActivities = activities.filter(activity => {
+      const activityDate = new Date(activity.date).toLocaleDateString();
+      return activityDate === date;
+    });
+
+    setTotalPoints(filteredActivities.reduce((acc, activity) => acc + activity.points, 0)); // Tính tổng điểm của ngày
+    return filteredActivities;
+  };
+
+  const handleDateSelection = (date) => {
+    setSelectedDate(date);
+    const selectedActivities = filterActivitiesByDate(date);
+    setActivities(selectedActivities); // Cập nhật lại hoạt động để hiển thị
+  };
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "/login";
+    window.location.href = '/login';
   };
 
   const toggleMenu = () => {
@@ -50,13 +94,11 @@ function UserDashboard() {
         </button>
       </header>
       <div className="dashboard-content">
-        <aside
-          className={`dashboard-sidebar ${isMenuCollapsed ? "collapsed" : ""}`}
-        >
+        <aside className={`dashboard-sidebar ${isMenuCollapsed ? 'collapsed' : ''}`}>
           <button className="menu-toggle-btn" onClick={toggleMenu}>
-            {isMenuCollapsed ? ">" : "<"}
+            {isMenuCollapsed ? '>' : '<'}
           </button>
-          <ul className={isMenuCollapsed ? "collapsed" : ""}>
+          <ul className={isMenuCollapsed ? 'collapsed' : ''}>
             <li>Trang chủ</li>
             <li>Hoạt động</li>
             <li>Thông báo</li>
@@ -79,11 +121,11 @@ function UserDashboard() {
                             src={userData.avatar}
                             alt="Avatar"
                             style={{
-                              width: "100px", 
-                              height: "100px", 
-                              borderRadius: "50%", 
-                              objectFit: "cover", 
-                              marginBottom: "10px",
+                              width: '100px',
+                              height: '100px',
+                              borderRadius: '50%',
+                              objectFit: 'cover',
+                              marginBottom: '10px',
                             }}
                           />
                         ) : (
@@ -108,31 +150,38 @@ function UserDashboard() {
                 </div>
                 <div className="col-5">
                   <div className="userInfo">
-                    <p>Thông tin bổ sung 2</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row row-2">
-                <div className="col-12">
-                  <div className="userInfo">
-                    <p>Thông tin bổ sung 2</p>
-                  </div>
-                </div>
-              </div>
-              <div className="row row-3">
-                <div className="col-4">
-                  <div className="userInfo">
-                    <p>Thông tin bổ sung 3</p>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="userInfo">
-                    <p>Thông tin bổ sung 4</p>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="userInfo">
-                    <p>Thông tin bổ sung 5</p>
+                    <p>
+                      <b>Hành động xanh</b>
+                    </p>
+                    <div>
+                      {/* Hiển thị danh sách các ngày có hoạt động */}
+                      <ul>
+                        {dateList.length > 0 ? (
+                          dateList.map((date, index) => (
+                            <li key={index}>
+                              <button onClick={() => handleDateSelection(date)}>
+                                {date}
+                              </button>
+                            </li>
+                          ))
+                        ) : (
+                          <p>Chưa có hoạt động nào.</p>
+                        )}
+                      </ul>
+                      <h3>Tổng điểm của ngày: {totalPoints}</h3>
+                      <ul>
+                        {activities.length > 0 ? (
+                          activities.map((activity) => (
+                            <li key={activity._id} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                              <span>{activity.type}</span>
+                              <span>{activity.points} điểm</span>
+                            </li>
+                          ))
+                        ) : (
+                          <p>Chưa có hoạt động nào cho ngày này.</p>
+                        )}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

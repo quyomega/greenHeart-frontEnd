@@ -17,6 +17,7 @@ function Login() {
       const response = await axios.post("http://localhost:5000/api/users/login", formData);
 
       const { token, role } = response.data;
+      // console.log(token);
 
       if (!token || !role) {
         console.error("API không trả về token hoặc role.");
