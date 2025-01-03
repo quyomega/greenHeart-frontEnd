@@ -1,0 +1,18 @@
+.organization-details-container {
+    padding: 20px;
+  }
+  
+  .organization-details-container h1 {
+    margin-bottom: 10px;
+  }
+  
+  .organization-details-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .organization-details-container li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  

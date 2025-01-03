@@ -6,6 +6,8 @@ import AdminDashboard from "./components/AdminDashboard";
 import UserDashboard from "./components/UserDashboard";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import UserDetails from "./components/UserDetails";
+import Organizations from "./components/Organizations";
+import OrganizationDetails from "./components/OrganizationDetails";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
         />
         <Route path="*" element={<Login />} />
         <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/organizations" element={<Organizations />} />
+        <Route path="/organizations/:orgId" element={<OrganizationDetails />} />
       </Routes>
     </Router>
   );

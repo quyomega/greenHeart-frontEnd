@@ -24,7 +24,8 @@ function UserDashboard() {
           }
         );
         setUserData(response.data);
-        console.log(token);
+        //lấy token
+        // console.log(token);
       } catch (error) {
         console.error("Lỗi khi lấy thông tin người dùng:", error);
         alert("Không thể tải thông tin. Vui lòng đăng nhập lại.");
@@ -217,25 +218,39 @@ function UserDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="row row-2">
-                <div className="col-3">
-                  <div className="userInfo">
-                    <p>Khối 1</p>
+              <div className="row row-3">
+                <div className="col-2">
+                  <div
+                    className="organization"
+                    onClick={() => navigate("/organizations")}
+                    style={{ cursor: "pointer" }} // Thêm con trỏ dạng pointer để hiển thị có thể click
+                  >
+                    <p>
+                      <b>Tổ chức</b>
+                    </p>
                   </div>
                 </div>
-                <div className="col-3">
+              </div>
+              <div className="row row-3">
+                <div className="col-4">
                   <div className="userInfo">
-                    <p>Khối 2</p>
+                    <p>
+                      <b>Xếp hạng</b>
+                    </p>
                   </div>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                   <div className="userInfo">
-                    <p>Khối 3</p>
+                    <p>
+                      <b>Tiến độ tăng cấp</b>
+                    </p>
                   </div>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                   <div className="userInfo">
-                    <p>Khối 4</p>
+                    <p>
+                      <b>Phụ lục tra cứu điểm</b>
+                    </p>
                   </div>
                 </div>
               </div>

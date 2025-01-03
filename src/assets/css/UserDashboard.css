@@ -113,6 +113,12 @@
   border-radius: 10px;
   height: 14rem;
 }
+.organization{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  height: 8rem;
+}
 .userAction{
   background-color: #fff;
   padding: 10px;
