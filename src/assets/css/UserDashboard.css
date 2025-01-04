@@ -112,19 +112,21 @@
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
+  white-space: nowrap;
 }
-.organization{
+.row2{
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 8rem;
+  /* text-align: center; */
 }
 .userAction{
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
-  max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của khối */
+  max-width: 100%; 
   overflow-x: auto;
 }
 .dashboard-main.sidebar-collapsed {
@@ -152,4 +154,77 @@
 }
 .details-link:hover {
   color: darkblue;
+}
+p{
+  margin: 5px !important;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.block:hover {
+  background-color: #eef5ff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.block:hover .organization-icon {
+  transform: scale(1.2);
+}
+.block p {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+.block:hover {
+  background-color: #eef5ff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+.organization-icon {
+  font-size: 2rem;
+  color: #4caf50;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+.badge-icon {
+  font-size: 2rem;
+  color: #ffc107;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+.titles-icon {
+  font-size: 2rem;
+  color: #6F42C1;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+.mission-icon {
+  font-size: 2rem;
+  color: #007BFF;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+.gift-icon {
+  font-size: 2rem;
+  color: #ff5733;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+.shop-icon {
+  font-size: 2rem;
+  color: #555555;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
 }

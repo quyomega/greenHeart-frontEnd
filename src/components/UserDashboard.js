@@ -151,13 +151,14 @@ function UserDashboard() {
                           Xem chi tiết
                         </p>
                       </div>
-                      <div className="col-5">
+                      <div className="col-6">
+                        <p>Mã : {userData.id}</p>
                         <p>Tên : {userData.name}</p>
                         <p>Email: {userData.email}</p>
                         <p>Số điện thoại: {userData.phone}</p>
                         <p>Địa chỉ: {userData.address}</p>
                       </div>
-                      <div className="col-4">
+                      <div className="col-3">
                         <p>Tổng điểm: {userData.points}</p>
                         <p>Cấp độ: {userData.level}</p>
                       </div>
@@ -167,7 +168,7 @@ function UserDashboard() {
                 <div className="col-5">
                   <div className="userAction">
                     <p>
-                      <b>Hành động xanh</b>
+                      <b>Điểm xanh theo từng ngày</b>
                     </p>
                     <div>
                       {/* Hiển thị danh sách các ngày có hoạt động */}
@@ -218,21 +219,94 @@ function UserDashboard() {
                   </div>
                 </div>
               </div>
-              <div className="row row-3">
+              <div className="row row-2">
+                {/* Tổ chức */}
                 <div className="col-2">
                   <div
-                    className="organization"
+                    className="row2 block"
                     onClick={() => navigate("/organizations")}
-                    style={{ cursor: "pointer" }} // Thêm con trỏ dạng pointer để hiển thị có thể click
+                    style={{ cursor: "pointer"}}
                   >
                     <p>
                       <b>Tổ chức</b>
                     </p>
+                    <i className="bi bi-building organization-icon"></i>
                   </div>
                 </div>
+
+                {/* Huy chương */}
+                <div className="col-2">
+                  <div
+                    className="row2 block"
+                    onClick={() => navigate("/badge")}
+                    style={{cursor: "pointer"}}
+                  > 
+                    <p>
+                      <b>Huy chương</b>
+                    </p>
+                    <i className="bi bi-award-fill badge-icon"></i>
+                  </div>
+                </div>
+
+                {/* Danh hiệu */}
+                <div className="col-2">
+                  <div
+                    className="row2 block"
+                    onClick={() => navigate("/titles")}
+                    style={{cursor: "pointer"}}
+                  > 
+                    <p>
+                      <b>Danh hiệu</b>
+                    </p>
+                    <i className="bi bi-file-earmark-text titles-icon"></i>
+                  </div>
+                </div>
+
+                {/* Nhiệm vụ */}
+                <div className="col-2">
+                  <div
+                    className="row2 block"
+                    onClick={() => navigate("/mission")}
+                    style={{cursor: "pointer"}}
+                  > 
+                    <p>
+                      <b>Nhiệm vụ</b>
+                    </p>
+                    <i className="bi bi-ui-checks mission-icon"></i>
+                  </div>
+                </div>
+
+                {/* Tặng phẩm */}
+                <div className="col-2">
+                  <div
+                    className="row2 block"
+                    onClick={() => navigate("/gift")}
+                    style={{cursor: "pointer"}}
+                  > 
+                    <p>
+                      <b>Quà tặng</b>
+                    </p>
+                    <i className="bi bi-gift gift-icon"></i>
+                  </div>
+                </div>
+
+                {/* Cửa hàng */}
+                <div className="col-2">
+                  <div
+                    className="row2 block"
+                    onClick={() => navigate("/shop")}
+                    style={{cursor: "pointer"}}
+                  > 
+                    <p>
+                      <b>Quà tặng</b>
+                    </p>
+                    <i className="bi bi-shop shop-icon"></i>
+                  </div>
+                </div>
+
               </div>
               <div className="row row-3">
-                <div className="col-4">
+                <div className="col-5">
                   <div className="userInfo">
                     <p>
                       <b>Xếp hạng</b>
@@ -242,14 +316,14 @@ function UserDashboard() {
                 <div className="col-4">
                   <div className="userInfo">
                     <p>
-                      <b>Tiến độ tăng cấp</b>
+                      <b>Phụ lục tra cứu điểm</b>
                     </p>
                   </div>
                 </div>
-                <div className="col-4">
+                <div className="col-3">
                   <div className="userInfo">
                     <p>
-                      <b>Phụ lục tra cứu điểm</b>
+                      <b>Tiến độ tăng cấp</b>
                     </p>
                   </div>
                 </div>
