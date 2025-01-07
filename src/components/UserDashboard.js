@@ -2,7 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Sử dụng useNavigate để điều hướng
 import axios from "axios";
 import "../assets/css/UserDashboard.css";
+import { Bar } from "react-chartjs-2"; // Import Bar từ react-chartjs-2
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
+// Register các thành phần cần thiết cho Chart.js
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 function UserDashboard() {
   const [userData, setUserData] = useState(null);
   const [activities, setActivities] = useState([]);
@@ -10,6 +21,8 @@ function UserDashboard() {
   const [dateList, setDateList] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(true);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [filter, setFilter] = useState("system");
   const navigate = useNavigate(); // Hook điều hướng
 
   // Gọi API để lấy thông tin người dùng và hoạt động
@@ -62,11 +75,24 @@ function UserDashboard() {
         console.error("Lỗi khi lấy danh sách hoạt động:", error);
       }
     };
-
+    const fetchLeaderboard = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `http://localhost:5000/api/activities/leaderboard?filter=${filter}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setLeaderboard(response.data.leaderboard);
+      } catch (error) {
+        console.error("Lỗi khi lấy bảng xếp hạng:", error);
+      }
+    };
     fetchUserData();
     fetchActivities();
-  }, []);
-
+    fetchLeaderboard();
+  }, [filter]);
   // Lọc các hoạt động theo ngày được chọn
   const filterActivitiesByDate = (date) => {
     const filteredActivities = activities.filter((activity) => {
@@ -85,7 +111,7 @@ function UserDashboard() {
     const selectedActivities = filterActivitiesByDate(date);
     setActivities(selectedActivities); // Cập nhật lại hoạt động để hiển thị
   };
-
+  
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
@@ -124,6 +150,7 @@ function UserDashboard() {
         <main className="dashboard-main">
           {userData ? (
             <div>
+              {/* row 1 */}
               <div className="row row-1">
                 <div className="col-7">
                   <div className="userInfo">
@@ -219,13 +246,15 @@ function UserDashboard() {
                   </div>
                 </div>
               </div>
+
+              {/* row 2 */}
               <div className="row row-2">
                 {/* Tổ chức */}
                 <div className="col-2">
                   <div
                     className="row2 block"
                     onClick={() => navigate("/organizations")}
-                    style={{ cursor: "pointer"}}
+                    style={{ cursor: "pointer" }}
                   >
                     <p>
                       <b>Tổ chức</b>
@@ -239,8 +268,8 @@ function UserDashboard() {
                   <div
                     className="row2 block"
                     onClick={() => navigate("/badge")}
-                    style={{cursor: "pointer"}}
-                  > 
+                    style={{ cursor: "pointer" }}
+                  >
                     <p>
                       <b>Huy chương</b>
                     </p>
@@ -253,8 +282,8 @@ function UserDashboard() {
                   <div
                     className="row2 block"
                     onClick={() => navigate("/titles")}
-                    style={{cursor: "pointer"}}
-                  > 
+                    style={{ cursor: "pointer" }}
+                  >
                     <p>
                       <b>Danh hiệu</b>
                     </p>
@@ -267,8 +296,8 @@ function UserDashboard() {
                   <div
                     className="row2 block"
                     onClick={() => navigate("/mission")}
-                    style={{cursor: "pointer"}}
-                  > 
+                    style={{ cursor: "pointer" }}
+                  >
                     <p>
                       <b>Nhiệm vụ</b>
                     </p>
@@ -281,8 +310,8 @@ function UserDashboard() {
                   <div
                     className="row2 block"
                     onClick={() => navigate("/gift")}
-                    style={{cursor: "pointer"}}
-                  > 
+                    style={{ cursor: "pointer" }}
+                  >
                     <p>
                       <b>Quà tặng</b>
                     </p>
@@ -295,24 +324,70 @@ function UserDashboard() {
                   <div
                     className="row2 block"
                     onClick={() => navigate("/shop")}
-                    style={{cursor: "pointer"}}
-                  > 
+                    style={{ cursor: "pointer" }}
+                  >
                     <p>
-                      <b>Quà tặng</b>
+                      <b>Cửa hàng</b>
                     </p>
                     <i className="bi bi-shop shop-icon"></i>
                   </div>
                 </div>
-
               </div>
+
+              {/* row 3 */}
               <div className="row row-3">
                 <div className="col-5">
-                  <div className="userInfo">
+                  <div className="ranking">
                     <p>
                       <b>Xếp hạng</b>
                     </p>
+                    <div>
+                      <label>
+                        Lọc xếp hạng:
+                        <select
+                          onChange={(e) => setFilter(e.target.value)}
+                          value={filter}
+                        >
+                          <option value="system">Toàn hệ thống</option>
+                          <option value="organization">Theo tổ chức</option>
+                        </select>
+                      </label>
+                    </div>
+
+                    {/* Hiển thị xếp hạng của người dùng */}
+                    {leaderboard.length > 0 ? (
+                      <>
+                        <p>
+                          <b>Xếp hạng của bạn:</b>{" "}
+                          {leaderboard.findIndex(
+                            (user) => user._id === userData.id
+                          ) + 1}
+                        </p>
+                        <div className="ranking-list">
+                          <ul>
+                            {leaderboard.map((user, index) => (
+                              <li
+                                key={user._id}
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <span>
+                                  {index + 1}. {user.name}
+                                </span>
+                                <span>{user.points} điểm</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </>
+                    ) : (
+                      <p>Chưa có dữ liệu xếp hạng.</p>
+                    )}
                   </div>
                 </div>
+
                 <div className="col-4">
                   <div className="userInfo">
                     <p>

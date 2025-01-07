@@ -1,7 +1,7 @@
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 50rem;
+  height: 100%;
   overflow: hidden;
   background-color: #ecf0f1;
 }
@@ -227,4 +227,32 @@ p{
   color: #555555;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
+}
+.ranking{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  height: 14rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ranking-list {
+  max-height: calc(100% - 40px);  /* Giới hạn chiều cao của danh sách */
+  overflow-y: auto;   /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
+  padding-right: 10px; /* Thêm khoảng cách cho thanh cuộn */
+}
+
+.ranking ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ranking li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.ranking li span {
+  display: inline-block;
 }
