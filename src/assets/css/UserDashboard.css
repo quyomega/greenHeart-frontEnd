@@ -239,7 +239,7 @@ p{
 .ranking-list {
   max-height: calc(100% - 40px);  /* Giới hạn chiều cao của danh sách */
   overflow-y: auto;   /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
-  padding-right: 10px; /* Thêm khoảng cách cho thanh cuộn */
+  padding-right: 5px; /* Thêm khoảng cách cho thanh cuộn */
 }
 
 .ranking ul {
@@ -255,4 +255,49 @@ p{
 
 .ranking li span {
   display: inline-block;
+}
+.listActicityType{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  height: 14rem;
+  white-space: nowrap;
+}
+.listActicityTypeTable{
+  border: 1px;
+  border-radius: 10px;
+  max-height: calc(100% - 40px);  /* Giới hạn chiều cao của danh sách */
+  overflow-y: auto;   /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
+  padding-right: 0px; /* Thêm khoảng cách cho thanh cuộn */
+}
+.listActicityType ul{
+  padding: 0px;
+  margin: 0px;
+}
+.activityTypeRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.activityTypeRow span {
+  flex: 1;
+  text-align: left;
+}
+
+.activityTypeRow span:last-child {
+  text-align: right;
+}
+
+.activityTypeRow.even {
+  background-color: #e9ecef; /* Màu trắng cho hàng chẵn */
+}
+
+.activityTypeRow.odd {
+  background-color: #f9f9f999; /* Màu xám nhẹ cho hàng lẻ */
+}
+
+.activityTypeRow:last-child {
+  border-bottom: none;
 }

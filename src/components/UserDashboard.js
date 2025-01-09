@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Sử dụng useNavigate để điều hướng
 import axios from "axios";
 import "../assets/css/UserDashboard.css";
-import { Bar } from "react-chartjs-2"; // Import Bar từ react-chartjs-2
+// import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   BarElement,
@@ -22,7 +22,8 @@ function UserDashboard() {
   const [totalPoints, setTotalPoints] = useState(0);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(true);
   const [leaderboard, setLeaderboard] = useState([]);
-  const [filter, setFilter] = useState("system");
+  const [activityTypes, setActivityTypes] = useState([]);
+  const [filter] = useState("system");
   const navigate = useNavigate(); // Hook điều hướng
 
   // Gọi API để lấy thông tin người dùng và hoạt động
@@ -89,9 +90,23 @@ function UserDashboard() {
         console.error("Lỗi khi lấy bảng xếp hạng:", error);
       }
     };
+    const fetchActivityTypes = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/activitytype/get-list"
+        );
+        // console.log("Dữ liệu trả về từ API:", response.data);
+        setActivityTypes(response.data.data || []);
+      } catch (error) {
+        console.error("Lỗi khi lấy danh sách loại hành động:", error);
+        setActivityTypes([]);
+      }
+    };
+
     fetchUserData();
     fetchActivities();
     fetchLeaderboard();
+    fetchActivityTypes();
   }, [filter]);
   // Lọc các hoạt động theo ngày được chọn
   const filterActivitiesByDate = (date) => {
@@ -111,7 +126,7 @@ function UserDashboard() {
     const selectedActivities = filterActivitiesByDate(date);
     setActivities(selectedActivities); // Cập nhật lại hoạt động để hiển thị
   };
-  
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
@@ -341,27 +356,16 @@ function UserDashboard() {
                     <p>
                       <b>Xếp hạng</b>
                     </p>
-                    <div>
-                      <label>
-                        Lọc xếp hạng:
-                        <select
-                          onChange={(e) => setFilter(e.target.value)}
-                          value={filter}
-                        >
-                          <option value="system">Toàn hệ thống</option>
-                          <option value="organization">Theo tổ chức</option>
-                        </select>
-                      </label>
-                    </div>
-
                     {/* Hiển thị xếp hạng của người dùng */}
                     {leaderboard.length > 0 ? (
                       <>
                         <p>
-                          <b>Xếp hạng của bạn:</b>{" "}
-                          {leaderboard.findIndex(
-                            (user) => user._id === userData.id
-                          ) + 1}
+                          <b>
+                            Thứ hạng của bạn :{" "}
+                            {leaderboard.findIndex(
+                              (user) => user._id === userData.id
+                            ) + 1}
+                          </b>
                         </p>
                         <div className="ranking-list">
                           <ul>
@@ -376,7 +380,7 @@ function UserDashboard() {
                                 <span>
                                   {index + 1}. {user.name}
                                 </span>
-                                <span>{user.points} điểm</span>
+                                <span>{user.totalPoints} điểm</span>
                               </li>
                             ))}
                           </ul>
@@ -389,12 +393,32 @@ function UserDashboard() {
                 </div>
 
                 <div className="col-4">
-                  <div className="userInfo">
+                  <div className="listActicityType">
                     <p>
                       <b>Phụ lục tra cứu điểm</b>
                     </p>
+                    <div className="listActicityTypeTable">
+                      <ul>
+                        {activityTypes?.length > 0 ? (
+                          activityTypes.map((activityType, index) => (
+                            <li
+                              key={activityType._id}
+                              className={`activityTypeRow ${
+                                index % 2 === 0 ? "even" : "odd"
+                              }`}
+                            >
+                              <span>{activityType.type}</span>
+                              <span>{activityType.points} điểm</span>
+                            </li>
+                          ))
+                        ) : (
+                          <p>Chưa có dữ liệu.</p>
+                        )}
+                      </ul>
+                    </div>
                   </div>
                 </div>
+
                 <div className="col-3">
                   <div className="userInfo">
                     <p>

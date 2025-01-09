@@ -42,7 +42,7 @@ function Login() {
     <div className="login-container">
       <div className="login-left">
         <div className="slogan">
-          <p>Trái tim xanh</p>
+          <p>Dự án trái tim xanh</p>
           <p>Kết nối với cộng đồng</p>
           <p>Hành động vì thiên nhiên</p>
         </div>
