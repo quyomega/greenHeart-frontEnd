@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Sử dụng useNavigate để điều hướng
 import axios from "axios";
 import "../assets/css/UserDashboard.css";
-// import { Bar } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
+  ArcElement,
   Tooltip,
   Legend,
 } from "chart.js";
-
-// Register các thành phần cần thiết cho Chart.js
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend);
 function UserDashboard() {
   const [userData, setUserData] = useState(null);
   const [activities, setActivities] = useState([]);
@@ -23,6 +19,7 @@ function UserDashboard() {
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(true);
   const [leaderboard, setLeaderboard] = useState([]);
   const [activityTypes, setActivityTypes] = useState([]);
+  const [levelProgress, setLevelProgress] = useState(0);
   const [filter] = useState("system");
   const navigate = useNavigate(); // Hook điều hướng
 
@@ -40,6 +37,10 @@ function UserDashboard() {
         setUserData(response.data);
         //lấy token
         // console.log(token);
+        // Tính tiến độ lên cấp
+        const nextLevelPoints = (response.data.level + 1) * 100 - (response.data.totalPoints);
+        const progress = 100-nextLevelPoints;
+        setLevelProgress(progress);
       } catch (error) {
         console.error("Lỗi khi lấy thông tin người dùng:", error);
         alert("Không thể tải thông tin. Vui lòng đăng nhập lại.");
@@ -108,6 +109,19 @@ function UserDashboard() {
     fetchLeaderboard();
     fetchActivityTypes();
   }, [filter]);
+
+  const chartData = {
+    labels: [],
+    datasets: [
+      {
+        data: [levelProgress, 100 - levelProgress],  
+        backgroundColor: ["#36A2EB", "#FF6384"],     
+        borderColor: ["#36A2EB", "#FF6384"],
+        borderWidth: 1,
+      },
+    ],
+  };
+  
   // Lọc các hoạt động theo ngày được chọn
   const filterActivitiesByDate = (date) => {
     const filteredActivities = activities.filter((activity) => {
@@ -424,6 +438,7 @@ function UserDashboard() {
                     <p>
                       <b>Tiến độ tăng cấp</b>
                     </p>
+                    <Doughnut data={chartData} className="doughnut-chart"/>
                   </div>
                 </div>
               </div>

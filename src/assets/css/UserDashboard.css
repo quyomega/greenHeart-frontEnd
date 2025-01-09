@@ -173,15 +173,6 @@ p{
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.block:hover {
-  background-color: #eef5ff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.block:hover .organization-icon {
-  transform: scale(1.2);
-}
 .block p {
   font-size: 1rem;
   font-weight: bold;
@@ -192,9 +183,27 @@ p{
   background-color: #eef5ff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
+.block:hover .organization-icon {
+  transform: scale(1.2);
+}
+.block:hover .badge-icon {
+  transform: scale(1.2);
+}
+.block:hover .titles-icon {
+  transform: scale(1.2);
+}
+.block:hover .mission-icon {
+  transform: scale(1.2);
+}
+.block:hover .gift-icon {
+  transform: scale(1.2);
+}
+.block:hover .shop-icon {
+  transform: scale(1.2);
+}
 .organization-icon {
   font-size: 2rem;
-  color: #4caf50;
+  color: #CC66CC;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
 }
@@ -300,4 +309,9 @@ p{
 
 .activityTypeRow:last-child {
   border-bottom: none;
+}
+.doughnut-chart {
+  /* Đảm bảo biểu đồ không bị tràn và vừa khít với khối chứa */
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
