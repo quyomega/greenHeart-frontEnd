@@ -36,8 +36,7 @@ function UserDashboard() {
         );
         setUserData(response.data);
         //lấy token
-        // console.log(token);
-        // Tính tiến độ lên cấp
+        console.log(token);
         const nextLevelPoints = (response.data.level + 1) * 100 - (response.data.totalPoints);
         const progress = 100-nextLevelPoints;
         setLevelProgress(progress);
@@ -434,7 +433,7 @@ function UserDashboard() {
                 </div>
 
                 <div className="col-3">
-                  <div className="userInfo">
+                  <div className="progressLevel">
                     <p>
                       <b>Tiến độ tăng cấp</b>
                     </p>

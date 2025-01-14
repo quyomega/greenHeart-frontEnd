@@ -106,3 +106,7 @@
   transform: scale(1.05); /* Phóng to khi hover */
   background-color: #f5f5f5; /* Thay đổi nền khi hover */
 }
+.doughnut-chart {
+  width: 250px;  /* Có thể điều chỉnh theo yêu cầu */
+  height: 250px; /* Có thể điều chỉnh theo yêu cầu */
+}

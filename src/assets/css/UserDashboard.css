@@ -310,8 +310,16 @@ p{
 .activityTypeRow:last-child {
   border-bottom: none;
 }
+.progressLevel{
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  height: 14rem;
+  white-space: nowrap;
+}
 .doughnut-chart {
-  /* Đảm bảo biểu đồ không bị tràn và vừa khít với khối chứa */
-  max-width: 100% !important;
-  max-height: 100% !important;
+  width: 10rem !important;
+  height: 10rem !important;
+  margin: 0 2rem;
+  text-align: center;
 }
