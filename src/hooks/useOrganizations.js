@@ -1,53 +1,42 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchUserOrganizations, createOrganization } from "../services/organizationService";
 
 const useOrganizations = () => {
   const [organizations, setOrganizations] = useState([]);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const fetchUserOrganizations = async () => {
+  // Gọi API lấy danh sách tổ chức
+  const fetchOrganizations = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(
-        "http://localhost:5000/api/organizations/my-organizations",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      setOrganizations(response.data);
+      const data = await fetchUserOrganizations(token); // Sử dụng organizationService
+      setOrganizations(data);
     } catch (error) {
       console.error("Lỗi khi lấy danh sách tổ chức:", error);
-      setError("Không thể tải danh sách tổ chức. Vui lòng thử lại.");
+      setError(error.message);
     }
   };
 
-  const createOrganization = async (newOrganizationName, newOrganizationDescription) => {
+  // Gọi API tạo tổ chức
+  const createNewOrganization = async (newOrganizationName, newOrganizationDescription) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post(
-        "http://localhost:5000/api/organizations/create",
-        {
-          name: newOrganizationName,
-          description: newOrganizationDescription,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await createOrganization(token, newOrganizationName, newOrganizationDescription); // Sử dụng organizationService
       setSuccessMessage("Tạo tổ chức thành công!");
-      fetchUserOrganizations(); // Tải lại danh sách tổ chức sau khi tạo mới
+      await fetchOrganizations(); // Cập nhật danh sách tổ chức
     } catch (error) {
       console.error("Lỗi khi tạo tổ chức:", error);
-      setError("Không thể tạo tổ chức. Vui lòng thử lại.");
+      setError(error.message);
     }
   };
 
+  // Lấy danh sách tổ chức khi component được mount
   useEffect(() => {
-    fetchUserOrganizations();
+    fetchOrganizations();
   }, []);
 
-  return { organizations, error, successMessage, createOrganization };
+  return { organizations, error, successMessage, createNewOrganization };
 };
 
 export default useOrganizations;

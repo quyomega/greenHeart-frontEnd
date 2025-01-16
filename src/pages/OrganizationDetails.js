@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useOrganizationDetails from "../hooks/useOrganizationDetails";  // Import hook
+import useOrganizationDetails from "../hooks/useOrganizationDetails";  
 
 import "../assets/css/OrganizationDetails.css";
 
 function OrganizationDetails() {
-  const { orgId } = useParams(); // Lấy ID tổ chức từ URL
+  const { orgId } = useParams();
   const {
     organization,
     memberCode,
@@ -16,7 +16,7 @@ function OrganizationDetails() {
     deleteSuccessMessage,
     handleAddMember,
     handleRemoveMember,
-  } = useOrganizationDetails(orgId); // Sử dụng hook để xử lý logic tổ chức
+  } = useOrganizationDetails(orgId); 
 
   return (
     <div>

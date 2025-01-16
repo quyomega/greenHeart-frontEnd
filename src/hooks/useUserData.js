@@ -4,7 +4,7 @@ import {
   fetchActivities,
   fetchLeaderboard,
   fetchActivityTypes,
-} from "../services/api";
+} from "../services/userService";
 
 const useUserData = (token, filter) => {
   const [userData, setUserData] = useState(null);
