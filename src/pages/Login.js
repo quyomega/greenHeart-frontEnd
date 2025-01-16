@@ -1,28 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import '../assets/css/Login.css';  
+import { useAuth } from "../hooks/useAuth.js"; 
+import '../assets/css/Login.css';
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const { error, login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/users/login", formData);
-
-      const { token, role } = response.data;
-      // console.log(token);
-
-      if (!token || !role) {
-        console.error("API không trả về token hoặc role.");
-        return;
-      }
+      const { token, role } = await login(formData);
+      if (!token || !role) return;
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
@@ -33,8 +31,7 @@ function Login() {
         navigate("/user");
       }
     } catch (error) {
-      console.error(error.response?.data?.message || "Login failed");
-      alert("Login failed. Please check your credentials.");
+      console.error(error);
     }
   };
 
@@ -47,10 +44,11 @@ function Login() {
           <p>Hành động vì thiên nhiên</p>
         </div>
       </div>
-      
+
       <div className="login-right">
         <div className="card shadow-sm p-4">
           <h2 className="text-center mb-4">Đăng nhập</h2>
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email</label>
@@ -59,8 +57,9 @@ function Login() {
                 className="form-control"
                 id="email"
                 name="email"
-                placeholder="Nơi nhập email của bạn"
+                placeholder="Nhập email của bạn"
                 onChange={handleChange}
+                value={formData.email}
                 required
               />
             </div>
@@ -71,8 +70,9 @@ function Login() {
                 className="form-control"
                 id="password"
                 name="password"
-                placeholder="Nơi nhập mật khẩu của bạn"
+                placeholder="Nhập mật khẩu của bạn"
                 onChange={handleChange}
+                value={formData.password}
                 required
               />
             </div>
@@ -80,7 +80,7 @@ function Login() {
           </form>
           <div className="mt-3 text-center">
             <p>
-              Bạn chưa có tài khoản ? <a href="/register">Đăng ký ở đây !</a>
+              Bạn chưa có tài khoản? <a href="/register">Đăng ký ở đây!</a>
             </p>
           </div>
         </div>

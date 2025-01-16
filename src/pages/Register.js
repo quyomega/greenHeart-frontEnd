@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth"; 
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ function Register() {
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
+  const { error, register } = useAuth();  
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,28 +18,18 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     if (formData.password !== formData.confirmPassword) {
-      setError("Mật khẩu nhập lại phải giống với mật khẩu !!!");
       return;
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/users/register",
-        {
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }
-      );
-
-      if (response.data) {
-        alert("Registration successful!");
+      const data = await register(formData); 
+      if (data) {
+        alert("Đăng ký thành công !!!");
         navigate("/login");
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Registration failed!");
+      console.error(error);  
     }
   };
 
@@ -56,13 +46,11 @@ function Register() {
       <div className="login-right">
         <div className="card shadow-sm p-4">
           <h2 className="text-center mb-4">Đăng ký</h2>
+          {/* Hiển thị lỗi nếu có */}
           {error && <p style={{ color: "red" }}>{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Họ và tên
-              </label>
-              <br></br>
+              <label htmlFor="name" className="form-label">Họ và tên</label>
               <input
                 type="text"
                 name="name"
@@ -74,9 +62,7 @@ function Register() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
+              <label htmlFor="email" className="form-label">Email</label>
               <input
                 type="email"
                 name="email"
@@ -88,9 +74,7 @@ function Register() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Mật khẩu
-              </label>
+              <label htmlFor="password" className="form-label">Mật khẩu</label>
               <input
                 type="password"
                 name="password"
@@ -102,9 +86,7 @@ function Register() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">
-                Xác nhận mật khẩu
-              </label>
+              <label htmlFor="confirmPassword" className="form-label">Xác nhận mật khẩu</label>
               <input
                 type="password"
                 name="confirmPassword"
@@ -115,14 +97,10 @@ function Register() {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100">
-              Đăng ký
-            </button>
+            <button type="submit" className="btn btn-primary w-100">Đăng ký</button>
           </form>
           <div className="mt-3 text-center">
-            <p>
-              Bạn đã có tài khoản ? <a href="/">Đăng nhập ở đây !</a>
-            </p>
+            <p>Bạn đã có tài khoản ? <a href="/login">Đăng nhập ở đây !</a></p>
           </div>
         </div>
       </div>

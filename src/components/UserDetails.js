@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../assets/css/UserDetails.css"; // Import file CSS để thay đổi giao diện
+import "../assets/css/UserDetails.css"; 
+import { API_BASE_URL } from "../constants";
 
 function UserDetails() {
   const [userDetails, setUserDetails] = useState(null);
-  const [isSaving, setIsSaving] = useState(false); // Trạng thái lưu thông tin
-  const [avatar, setAvatar] = useState(""); // URL ảnh đại diện
+  const [isSaving, setIsSaving] = useState(false); 
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "http://localhost:5000/api/users/profile",
+          `${API_BASE_URL}/users/profile`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
         setUserDetails(response.data);
-        setAvatar(response.data.avatar || ""); // Hiển thị avatar nếu đã có
+        setAvatar(response.data.avatar || "");
       } catch (error) {
         console.error("Lỗi khi tải thông tin chi tiết:", error);
       }
@@ -34,18 +35,16 @@ function UserDetails() {
     }));
   };
 
-  const [avatarFile, setAvatarFile] = useState(null); // Lưu file ảnh để gửi
-
-  // Hàm xử lý chọn ảnh khi click vào ảnh đại diện
+  const [avatarFile, setAvatarFile] = useState(null); 
   const handleAvatarClick = () => {
-    document.getElementById("avatar-input").click(); // Mở hộp thoại chọn file ảnh
+    document.getElementById("avatar-input").click(); 
   };
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setAvatarFile(file); // Lưu file vào state
-      setAvatar(URL.createObjectURL(file)); // Hiển thị ảnh tạm trước khi upload
+      setAvatarFile(file); 
+      setAvatar(URL.createObjectURL(file)); 
     }
   };
 

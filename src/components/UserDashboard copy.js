@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Sử dụng useNavigate để điều hướng
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import "../assets/css/UserDashboard.css";
 import { Doughnut } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { API_BASE_URL } from "../constants";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import UserProfile from "./UserProfile";
+import ActivityList from "./ActivityList";
 ChartJS.register(ArcElement, Tooltip, Legend);
 function UserDashboard() {
   const [userData, setUserData] = useState(null);
@@ -21,24 +19,21 @@ function UserDashboard() {
   const [activityTypes, setActivityTypes] = useState([]);
   const [levelProgress, setLevelProgress] = useState(0);
   const [filter] = useState("system");
-  const navigate = useNavigate(); // Hook điều hướng
+  const navigate = useNavigate(); 
 
-  // Gọi API để lấy thông tin người dùng và hoạt động
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://localhost:5000/api/users/profile",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await axios.get(`${API_BASE_URL}/users/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setUserData(response.data);
         //lấy token
         console.log(token);
-        const nextLevelPoints = (response.data.level + 1) * 100 - (response.data.totalPoints);
-        const progress = 100-nextLevelPoints;
+        const nextLevelPoints =
+          (response.data.level + 1) * 100 - response.data.totalPoints;
+        const progress = 100 - nextLevelPoints;
         setLevelProgress(progress);
       } catch (error) {
         console.error("Lỗi khi lấy thông tin người dùng:", error);
@@ -113,14 +108,14 @@ function UserDashboard() {
     labels: [],
     datasets: [
       {
-        data: [levelProgress, 100 - levelProgress],  
-        backgroundColor: ["#36A2EB", "#FF6384"],     
+        data: [levelProgress, 100 - levelProgress],
+        backgroundColor: ["#36A2EB", "#FF6384"],
         borderColor: ["#36A2EB", "#FF6384"],
         borderWidth: 1,
       },
     ],
   };
-  
+
   // Lọc các hoạt động theo ngày được chọn
   const filterActivitiesByDate = (date) => {
     const filteredActivities = activities.filter((activity) => {
@@ -148,11 +143,6 @@ function UserDashboard() {
   const toggleMenu = () => {
     setIsMenuCollapsed(!isMenuCollapsed);
   };
-
-  const goToUserDetails = () => {
-    navigate("/user-details");
-  };
-
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
@@ -180,98 +170,17 @@ function UserDashboard() {
             <div>
               {/* row 1 */}
               <div className="row row-1">
-                <div className="col-7">
-                  <div className="userInfo">
-                    <p>
-                      <b>Thông tin tài khoản</b>
-                    </p>
-                    <div className="row">
-                      <div className="col-3">
-                        {userData.avatar ? (
-                          <img
-                            src={userData.avatar}
-                            alt="Avatar"
-                            style={{
-                              width: "100px",
-                              height: "100px",
-                              borderRadius: "50%",
-                              objectFit: "cover",
-                              marginBottom: "10px",
-                            }}
-                          />
-                        ) : (
-                          <p>Chưa có ảnh đại diện</p>
-                        )}
-                        <p onClick={goToUserDetails} className="details-link">
-                          Xem chi tiết
-                        </p>
-                      </div>
-                      <div className="col-6">
-                        <p>Mã : {userData.id}</p>
-                        <p>Tên : {userData.name}</p>
-                        <p>Email: {userData.email}</p>
-                        <p>Số điện thoại: {userData.phone}</p>
-                        <p>Địa chỉ: {userData.address}</p>
-                      </div>
-                      <div className="col-3">
-                        <p>Tổng điểm: {userData.points}</p>
-                        <p>Cấp độ: {userData.level}</p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="col-7">                  
+                  <UserProfile userData={userData} />                
                 </div>
                 <div className="col-5">
-                  <div className="userAction">
-                    <p>
-                      <b>Điểm xanh theo từng ngày</b>
-                    </p>
-                    <div>
-                      {/* Hiển thị danh sách các ngày có hoạt động */}
-                      {dateList.length > 0 ? (
-                        <select
-                          onChange={(e) => handleDateSelection(e.target.value)}
-                          defaultValue=""
-                        >
-                          <option value="" disabled>
-                            Chọn ngày
-                          </option>
-                          {dateList.map((date, index) => (
-                            <option key={index} value={date}>
-                              {date}
-                            </option>
-                          ))}
-                        </select>
-                      ) : (
-                        <p>Chưa có hoạt động nào.</p>
-                      )}
-                      {selectedDate && (
-                        <>
-                          <p>
-                            Tổng điểm xanh của ngày {selectedDate} là :{" "}
-                            {totalPoints} điểm
-                          </p>
-                          <ul>
-                            {activities.length > 0 ? (
-                              activities.map((activity) => (
-                                <li
-                                  key={activity._id}
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                  }}
-                                >
-                                  <span>{activity.type}</span>
-                                  <span>{activity.points} điểm</span>
-                                </li>
-                              ))
-                            ) : (
-                              <p>Chưa có hoạt động nào cho ngày này.</p>
-                            )}
-                          </ul>
-                        </>
-                      )}
-                    </div>
-                  </div>
+                <ActivityList 
+                dateList={dateList} 
+                selectedDate={selectedDate} 
+                totalPoints={totalPoints} 
+                activities={activities}
+                onDateSelect={setSelectedDate} 
+              />
                 </div>
               </div>
 
@@ -437,7 +346,7 @@ function UserDashboard() {
                     <p>
                       <b>Tiến độ tăng cấp</b>
                     </p>
-                    <Doughnut data={chartData} className="doughnut-chart"/>
+                    <Doughnut data={chartData} className="doughnut-chart" />
                   </div>
                 </div>
               </div>

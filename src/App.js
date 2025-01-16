@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import AdminDashboard from "./components/AdminDashboard";
-import UserDashboard from "./components/UserDashboard";
-import ProtectedRoute from "./pages/ProtectedRoute";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import AdminDashboard from "./pages/AdminDashboard";
+import UserDashboard from "./pages/UserDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 import UserDetails from "./components/UserDetails";
-import Organizations from "./components/Organizations";
-import OrganizationDetails from "./components/OrganizationDetails";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Organizations from "./pages/Organizations";
+import OrganizationDetails from "./pages/OrganizationDetails";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -16,15 +16,6 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/user" element={<ProtectedRoute role="user"><UserDashboard /></ProtectedRoute>} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
         <Route
           path="/user"
           element={
@@ -33,10 +24,18 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Login />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/organizations" element={<Organizations />} />
         <Route path="/organizations/:orgId" element={<OrganizationDetails />} />
+        <Route path="*" element={<Login />} />
       </Routes>
     </Router>
   );
