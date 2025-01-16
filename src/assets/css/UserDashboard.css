@@ -1,12 +1,14 @@
+p {
+  margin: 5px !important;
+}
 .dashboard-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
   background-color: #ecf0f1;
-  overflow-y: auto;  
+  overflow-y: auto;
 }
-
 .dashboard-header {
   background-color: #2c3e50;
   color: white;
@@ -38,7 +40,6 @@
   position: fixed;
   top: 60px;
   left: 0;
-  /* height: calc(100vh - 60px); */
   z-index: 999;
   display: flex;
   flex-direction: column;
@@ -50,7 +51,7 @@
 .dashboard-sidebar.collapsed {
   top: 86px;
   width: 60px;
-  height: 60px; 
+  height: 60px;
 }
 
 .dashboard-sidebar ul {
@@ -69,7 +70,6 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
-  /* margin-bottom: 20px; */
 }
 
 .dashboard-sidebar.collapsed ul li {
@@ -108,26 +108,25 @@
 .dashboard-main .row > div {
   padding: 10px;
 }
-.userInfo{
+.userInfo {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
   white-space: nowrap;
 }
-.row2{
+.row2 {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 8rem;
-  /* text-align: center; */
 }
-.userAction{
+.userAction {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
-  max-width: 100%; 
+  max-width: 100%;
   overflow-x: auto;
 }
 .dashboard-main.sidebar-collapsed {
@@ -156,9 +155,6 @@
 .details-link:hover {
   color: darkblue;
 }
-p{
-  margin: 5px !important;
-}
 
 .block {
   display: flex;
@@ -167,7 +163,7 @@ p{
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: #f9f9f9;
+  background-color: #fff;
   border-radius: 8px;
   padding: 20px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -179,6 +175,7 @@ p{
   font-weight: bold;
   color: #333;
   margin: 0;
+  white-space: nowrap;
 }
 .block:hover {
   background-color: #eef5ff;
@@ -204,7 +201,7 @@ p{
 }
 .organization-icon {
   font-size: 2rem;
-  color: #CC66CC;
+  color: #cc66cc;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
 }
@@ -216,13 +213,13 @@ p{
 }
 .titles-icon {
   font-size: 2rem;
-  color: #6F42C1;
+  color: #6f42c1;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
 }
 .mission-icon {
   font-size: 2rem;
-  color: #007BFF;
+  color: #007bff;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
 }
@@ -238,7 +235,7 @@ p{
   margin-bottom: 10px;
   transition: transform 0.3s ease;
 }
-.ranking{
+.ranking {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
@@ -247,8 +244,8 @@ p{
   overflow: hidden;
 }
 .ranking-list {
-  max-height: calc(100% - 40px);  /* Giới hạn chiều cao của danh sách */
-  overflow-y: auto;   /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
+  max-height: calc(100% - 40px); /* Giới hạn chiều cao của danh sách */
+  overflow-y: auto; /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
   padding-right: 5px; /* Thêm khoảng cách cho thanh cuộn */
 }
 
@@ -266,21 +263,20 @@ p{
 .ranking li span {
   display: inline-block;
 }
-.listActicityType{
+.listActicityType {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
-  white-space: nowrap;
 }
-.listActicityTypeTable{
+.listActicityTypeTable {
   border: 1px;
   border-radius: 10px;
-  max-height: calc(100% - 40px);  /* Giới hạn chiều cao của danh sách */
-  overflow-y: auto;   /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
+  max-height: calc(100% - 40px); /* Giới hạn chiều cao của danh sách */
+  overflow-y: auto; /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
   padding-right: 0px; /* Thêm khoảng cách cho thanh cuộn */
 }
-.listActicityType ul{
+.listActicityType ul {
   padding: 0px;
   margin: 0px;
 }
@@ -311,16 +307,96 @@ p{
 .activityTypeRow:last-child {
   border-bottom: none;
 }
-.progressLevel{
+.progressLevel {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .doughnut-chart {
-  width: 10rem !important;
-  height: 10rem !important;
-  margin: 0 2rem;
+  align-self: center;
+  max-width: 10rem !important;
+  max-height: 10rem !important;
   text-align: center;
+  display: block;
+}
+@media (max-width: 1200px) {
+  @media (max-width: 1045px) {
+    .dashboard-main .row-1 {
+      flex-direction: column; /* Sắp xếp theo chiều dọc */
+    }
+
+    .dashboard-main .row-1 > .col-7,
+    .dashboard-main .row-1 > .col-5 {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .dashboard-main .row-2 {
+      display: flex;
+      flex-wrap: wrap; /* Cho phép các khối tự động xuống hàng */
+      justify-content: space-between;
+    }
+    .dashboard-main .row-2 > .col-2 {
+      width: calc(33.333% - 10px);
+      margin-bottom: 10px;
+    }
+    @media (max-width: 990px) {
+      .dashboard-main .row-3 {
+        flex-direction: row;
+      }
+      .dashboard-main .row-3 > .col-5 {
+        width: 100%;
+      }
+      .dashboard-main .row-3 > .col-4,
+      .dashboard-main .row-3 > .col-3 {
+        width: 50%;
+      }
+      @media (max-width: 700px) {
+        .dashboard-main .row-3 {
+          flex-direction: row;
+        }
+        .dashboard-main .row-3 > .col-5,
+        .dashboard-main .row-3 > .col-4,
+        .dashboard-main .row-3 > .col-3 {
+          width: 100%;
+        }
+        @media (max-width: 570px) {
+          .dashboard-main .row-1 .userInfo {
+            height: 26rem;
+          }
+          .dashboard-main .row-1 .userInfo p {
+            width: 100%;
+          }
+          .dashboard-main .row-1 .userInfo > .row {
+            white-space: normal;
+          }
+          .dashboard-main .row-1 .userInfo > .row > .col-3 {
+            width: 100%;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-start; 
+            text-align: center;
+          }
+          .dashboard-main .row-1 .userInfo > .row > .col-6,
+          .dashboard-main .row-1 .userInfo > .row > .col-2 {
+            width: 50%;
+          }
+          .dashboard-main .row-2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+          }
+          .dashboard-main .row-2 > .col-2 {
+            width: calc(50% - 10px);
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
 }

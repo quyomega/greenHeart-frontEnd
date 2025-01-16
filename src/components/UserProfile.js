@@ -34,13 +34,13 @@ function UserProfile({ userData }) {
           </p>
         </div>
         <div className="col-6">
-          <p>Mã: {userData.id}</p>
+          {/* <p>Mã: {userData.id}</p> */}
           <p>Tên: {userData.name}</p>
           <p>Email: {userData.email}</p>
           <p>Số điện thoại: {userData.phone}</p>
           <p>Địa chỉ: {userData.address}</p>
         </div>
-        <div className="col-3">
+        <div className="col-2">
           <p>Tổng điểm: {userData.points}</p>
           <p>Cấp độ: {userData.level}</p>
         </div>

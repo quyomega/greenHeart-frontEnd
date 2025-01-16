@@ -80,7 +80,7 @@ function UserDashboard() {
                   path="/organizations"
                 />
                 <DashboardItem
-                  label="Huy chương"
+                  label="Huy hiệu"
                   iconClass="bi-award-fill badge-icon"
                   path="/badge"
                 />

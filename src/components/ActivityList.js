@@ -9,9 +9,7 @@ function ActivityList({
 }) {
   return (
     <div className="userAction">
-      <p>
-        <b>Điểm xanh theo từng ngày</b>
-      </p>
+      
       <select onChange={(e) => onDateSelect(e.target.value)} defaultValue="">
         <option value="" disabled>
           Chọn ngày
