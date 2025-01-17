@@ -126,8 +126,14 @@ p {
   padding: 10px;
   border-radius: 10px;
   height: 14rem;
-  max-width: 100%;
-  overflow-x: auto;
+  white-space: nowrap;
+}
+.userAction ul{
+  padding-left: 10px;
+}
+.userActionTable{
+  max-height: 45%;
+  overflow-y: auto;
 }
 .dashboard-main.sidebar-collapsed {
   margin-left: 60px;

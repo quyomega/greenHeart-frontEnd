@@ -35,6 +35,9 @@ function ActivityList({ dateList, selectedDate, activities, onDateSelect }) {
 
   return (
     <div className="userAction">
+      <p>
+        <b>Điểm xanh theo từng ngày</b>
+      </p>
       <select onChange={(e) => onDateSelect(e.target.value)} defaultValue="">
         <option value="" disabled>
           Chọn ngày
@@ -51,24 +54,26 @@ function ActivityList({ dateList, selectedDate, activities, onDateSelect }) {
             Tổng điểm xanh của ngày {formattedSelectedDate} là:{" "}
             {totalPointSelectedDate} điểm
           </p>
-          <ul>
-            {activitiesForSelectedDate.length > 0 ? (
-              activitiesForSelectedDate.map((activity) => (
-                <li
-                  key={activity._id}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <span>{activity.type}</span>
-                  <span>{activity.points} điểm</span>
-                </li>
-              ))
-            ) : (
-              <p>Chưa có hoạt động nào cho ngày này.</p>
-            )}
-          </ul>
+          <div className="userActionTable">
+            <ul>
+              {activitiesForSelectedDate.length > 0 ? (
+                activitiesForSelectedDate.map((activity) => (
+                  <li
+                    key={activity._id}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <span>{activity.type}</span>
+                    <span>{activity.points} điểm</span>
+                  </li>
+                ))
+              ) : (
+                <p>Chưa có hoạt động nào cho ngày này.</p>
+              )}
+            </ul>
+          </div>
         </>
       )}
     </div>
