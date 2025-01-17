@@ -29,7 +29,7 @@ const addMember = async (orgId, memberCode) => {
 const removeMember = async (orgId, memberId) => {
   const token = localStorage.getItem("token");
   await axios.post(
-    "http://localhost:5000/api/organizations/remove-user",
+    `${API_BASE_URL}/organizations/remove-user`,
     {
       organizationId: orgId,
       userId: memberId,
