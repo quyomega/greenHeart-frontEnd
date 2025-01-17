@@ -15,6 +15,7 @@ function ActivityList({
   };
 
   const formatSelectedDate = (dateString) => {
+    if (!dateString) return ''; // Kiểm tra nếu dateString là null hoặc undefined
     const [day, month, year] = dateString.split('/');
     return `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
   };
