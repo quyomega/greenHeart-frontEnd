@@ -8,11 +8,14 @@ import ActivityTypes from "../components/ActivityTypes";
 import ProgressLevel from "../components/ProgressLevel";
 import DashboardItem from "../components/DashboardItem";
 import useUserData from "../hooks/useUserData";
+import { useNavigate } from "react-router-dom";
 ChartJS.register(ArcElement, Tooltip, Legend);
 function UserDashboard() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [isMenuCollapsed, setIsMenuCollapsed] = useState(true);
   const [filter] = useState("system");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
 
   const token = localStorage.getItem("token");
   const {
@@ -24,6 +27,8 @@ function UserDashboard() {
     dateList,
   } = useUserData(token, filter);
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
@@ -33,13 +38,43 @@ function UserDashboard() {
     setIsMenuCollapsed(!isMenuCollapsed);
   };
 
+  const toggleLogoutButton = () => {
+    setIsMenuOpen(!isMenuOpen);
+    setShowLogout(!showLogout);
+  };
+
+  const goToUserDetails = () => {
+    navigate("/user-details");
+  };
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
         <h1>UserDashboard</h1>
-        <button className="logout-btn" onClick={handleLogout}>
-          Đăng xuất
-        </button>
+        <div className="header-container">
+          <div className="hamburger-btn-container">
+            <button
+              style={{color: "white", border: "none"}}
+              className="hamburger-btn" onClick={toggleLogoutButton}>
+            {isMenuOpen ? "|||" : "☰"} {/* Thay đổi biểu tượng */}
+          </button>
+          </div>
+          {showLogout && ( // Chỉ hiển thị nút đăng xuất khi showLogout là true
+            
+            <div className="logout-btn-container">
+              <button
+                className="details-btn"
+                onClick={goToUserDetails}
+              >Thông tin tài khoản</button>
+              <button
+                className="logout-btn"
+                onClick={handleLogout}
+              >
+                Đăng xuất
+              </button>
+            </div>
+          )}
+        </div>
       </header>
       <div className="dashboard-content">
         <aside

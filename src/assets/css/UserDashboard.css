@@ -400,3 +400,70 @@ p {
     }
   }
 }
+
+.hamburger-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 10px;
+  right: 150px;
+}
+
+.hamburger-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.hamburger-btn:hover {
+  color: #007bff;
+}
+
+.logout-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 120px;  
+}
+
+.logout-btn,
+.details-btn {
+  width: 100%;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+.details-btn {
+  background-color: #007bff;
+}
+
+.details-btn:hover {
+  background-color: #0056b3;
+}
+
+.show-logout {
+  display: block;
+}
+.style-wirting {
+  color: #531414;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+}
