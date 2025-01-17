@@ -22,9 +22,9 @@ const useOrganizations = () => {
   const createNewOrganization = async (newOrganizationName, newOrganizationDescription) => {
     try {
       const token = localStorage.getItem("token");
-      await createOrganization(token, newOrganizationName, newOrganizationDescription); // Sử dụng organizationService
+      await createOrganization(token, newOrganizationName, newOrganizationDescription); 
       setSuccessMessage("Tạo tổ chức thành công!");
-      await fetchOrganizations(); // Cập nhật danh sách tổ chức
+      await fetchOrganizations(); 
     } catch (error) {
       console.error("Lỗi khi tạo tổ chức:", error);
       setError(error.message);
