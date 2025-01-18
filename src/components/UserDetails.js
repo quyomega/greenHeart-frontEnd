@@ -65,7 +65,7 @@ function UserDetails() {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        "http://localhost:5000/api/users/update",
+        `${API_BASE_URL}/users/update`,
         formData,
         {
           headers: {

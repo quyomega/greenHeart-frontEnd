@@ -3,6 +3,7 @@ import { API_BASE_URL } from "../constants";
 
 const fetchUserOrganizations = async (token) => {
   try {
+    // lay danh sach tổ chức của user
     const response = await axios.get(
       `${API_BASE_URL}/organizations/my-organizations`,
       {
@@ -14,7 +15,7 @@ const fetchUserOrganizations = async (token) => {
     throw new Error("Không thể tải danh sách tổ chức.");
   }
 };
-
+// tạo tổ chức mới
 const createOrganization = async (token, newOrganizationName, newOrganizationDescription) => {
   try {
     await axios.post(

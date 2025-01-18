@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../assets/css/UserDashboard.css";
 
 function UserProfile({ userData }) {
+  console.log("userData", userData);
   const goToUserDetails = () => {
     navigate("/user-details");
   };

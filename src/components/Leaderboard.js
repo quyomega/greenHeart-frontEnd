@@ -1,6 +1,7 @@
 import React from "react";
 
 function Leaderboard({ leaderboard, userData }) {
+
   const currentUserIndex = leaderboard.findIndex(
     (user) => user._id === userData.id
   );
