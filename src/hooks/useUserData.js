@@ -13,15 +13,20 @@ const useUserData = (token, filter) => {
   const [activityTypes, setActivityTypes] = useState([]);
   const [levelProgress, setLevelProgress] = useState(0);
   const [dateList, setDateList] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const loadData = async () => {
       try {
+        if (!token) {
+          throw new Error("Token không hợp lệ.");
+        }
+
         // Lấy dữ liệu người dùng
         const user = await fetchUserData(token);
         setUserData(user);
         //lấy token
-        console.log(token);
+        // console.log(token);
         // Tính toán tiến độ cấp độ
         const nextLevelPoints = (user.level + 1) * 100 - user.totalPoints;
         setLevelProgress(100 - nextLevelPoints);
@@ -49,6 +54,7 @@ const useUserData = (token, filter) => {
         setActivityTypes(activityTypesData);
       } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
+        setError(error.message || "Đã xảy ra lỗi khi tải dữ liệu.");
       }
     };
 
@@ -62,6 +68,7 @@ const useUserData = (token, filter) => {
     activityTypes,
     levelProgress,
     dateList,
+    error,
   };
 };
 

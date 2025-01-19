@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "../constants";
 
-
+// đăng nhập
 export const loginUser = async (formData) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/users/login`, formData);
@@ -11,6 +11,7 @@ export const loginUser = async (formData) => {
   }
 };
 
+// đăng ký
 export const registerUser = async (formData) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/users/register`, formData);

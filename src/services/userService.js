@@ -28,6 +28,19 @@ export const fetchLeaderboard = async (token, filter) => {
   return response.data.leaderboard;
 };
 
+// API gọi danh sách người dùng
+export const fetchAllUsers = async (token) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/users/allprofile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data.data || [];
+  } catch (error) {
+    console.error("Có lỗi xảy ra khi lấy dữ liệu tất cả người dùng:", error);
+    throw error;
+  }
+};
+
 // API gọi danh sách loại hoạt động
 export const fetchActivityTypes = async () => {
   const response = await axios.get(`${API_BASE_URL}/activitytype/get-list`);

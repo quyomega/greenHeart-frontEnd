@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../constants";
-
+// lấy thông tin chi tiết của tổ chức
 const fetchOrganizationDetails = async (orgId) => {
   const token = localStorage.getItem("token");
   const response = await axios.get(
@@ -9,9 +9,9 @@ const fetchOrganizationDetails = async (orgId) => {
       headers: { Authorization: `Bearer ${token}` },
     }
   );
-  return response.data;
+  return response.data.data;
 };
-
+// thêm thành viên vào tổ chức
 const addMember = async (orgId, memberCode) => {
   const token = localStorage.getItem("token");
   await axios.post(
