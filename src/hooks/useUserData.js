@@ -21,7 +21,7 @@ const useUserData = (token, filter) => {
         const user = await fetchUserData(token);
         setUserData(user);
         //lấy token
-        // console.log(token);
+        console.log(token);
         // Tính toán tiến độ cấp độ
         const nextLevelPoints = (user.level + 1) * 100 - user.totalPoints;
         setLevelProgress(100 - nextLevelPoints);

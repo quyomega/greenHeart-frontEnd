@@ -1,0 +1,60 @@
+/* src/assets/css/Mission.css */
+.mission-container {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+.mission-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.mission-table th,
+.mission-table td {
+  padding: 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.mission-table th {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.mission-table td {
+  background-color: #f9f9f9;
+  font-size: 1rem;
+}
+
+.mission-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.mission-details-link {
+  text-decoration: none;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.mission-details-link:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.success {
+  color: #5bc0de;
+  font-weight: bold;
+}

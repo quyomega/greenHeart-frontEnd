@@ -34,7 +34,7 @@ function UserProfile({ userData }) {
           </p>
         </div>
         <div className="col-6">
-          {/* <p>Mã: {userData.id}</p> */}
+          <p>Mã: {userData.id}</p>
           <p>Tên: {userData.name}</p>
           <p>Email: {userData.email}</p>
           <p>Số điện thoại: {userData.phone}</p>
