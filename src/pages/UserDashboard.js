@@ -49,7 +49,7 @@ function UserDashboard() {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header">
+      <header className="dashboard-header header">
         <h1>UserDashboard</h1>
         <div className="header-container">
           <div className="hamburger-btn-container">
@@ -79,15 +79,22 @@ function UserDashboard() {
       <div className="dashboard-content">
         <aside
           className={`dashboard-sidebar ${isMenuCollapsed ? "collapsed" : ""}`}
+          style={{
+            backgroundColor: "#f9f9f9",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            padding: "3px",
+            fontSize: "14px",
+            borderRadius: "8px"
+          }}
         >
-          <button className="menu-toggle-btn" onClick={toggleMenu}>
+          <button className="menu-toggle-btn" onClick={toggleMenu} style={{border: "none", backgroundColor: "transparent", color: "#198363", padding: "3px"}}>
             {isMenuCollapsed ? ">" : "<"}
           </button>
-          <ul className={isMenuCollapsed ? "collapsed" : ""}>
-            <li>Trang chủ</li>
-            <li>Hoạt động</li>
-            <li>Thông báo</li>
-            <li>Hỗ trợ</li>
+          <ul className={isMenuCollapsed ? "collapsed" : ""} style={{listStyleType: "none", padding: "0", margin: "0"}}>
+            <li style={{padding: "3px 8px", borderBottom: "1px solid #ddd", borderRadius: "4px", marginBottom: "3px"}}>Trang chủ</li>
+            <li style={{padding: "3px 8px", borderBottom: "1px solid #ddd", borderRadius: "4px", marginBottom: "3px"}}>Hoạt động</li>
+            <li style={{padding: "3px 8px", borderBottom: "1px solid #ddd", borderRadius: "4px", marginBottom: "3px"}}>Thông báo</li>
+            <li style={{padding: "3px 8px", borderRadius: "4px"}}>Hỗ trợ</li>
           </ul>
         </aside>
         <main className="dashboard-main">
