@@ -1,4 +1,6 @@
 import React from "react";
+import "../assets/css/ActivityTypes.css";
+
 function ActivityTypes({ activityTypes }) {
   return (
     <div className="listActicityType">

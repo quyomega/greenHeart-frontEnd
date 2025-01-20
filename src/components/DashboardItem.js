@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "../assets/css/DashboardItem.css";
 
 function DashboardItem({ label, iconClass, path }) {
   const navigate = useNavigate();

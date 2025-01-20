@@ -1,55 +1,63 @@
 /* src/assets/css/Login.css */
 .login-container {
+  display: flex;
+  height: 100vh;
+  background-image: url("../images/background.jpg"); /* Đường dẫn tới ảnh nền */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Lớp phủ tối */
+  z-index: 1; /* Đảm bảo lớp phủ luôn nằm trên ảnh nền nhưng dưới nội dung */
+}
+
+.login-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding-left: 50px; /* Cách bên trái 1 chút */
+  z-index: 2; /* Đảm bảo slogan nằm trên lớp phủ */
+}
+
+.slogan {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.login-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2; /* Đảm bảo form đăng nhập nằm trên lớp phủ */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tạo bóng nhẹ cho card */
+  width: 400px; /* Đặt chiều rộng cho card */
+  height: 400px;
+}
+@media (max-width: 850px) {
+  .login-container .col-6{
+    width: 100%;
+  }
+  .login-container {
     display: flex;
-    height: 100vh;
-    background-image: url('../images/background.jpg'); /* Đường dẫn tới ảnh nền */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
+    flex-wrap: wrap;
   }
-  
-  .login-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Lớp phủ tối */
-    z-index: 1; /* Đảm bảo lớp phủ luôn nằm trên ảnh nền nhưng dưới nội dung */
-  }
-  
-  .login-left {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    padding-left: 50px; /* Cách bên trái 1 chút */
-    z-index: 2; /* Đảm bảo slogan nằm trên lớp phủ */
-  }
-  
-  .slogan {
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 1.5;
-  }
-  
-  .login-right {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2; /* Đảm bảo form đăng nhập nằm trên lớp phủ */
-  }
-  
-  .card {
-    background-color: rgba(255, 255, 255, 0.3) !important; 
-    border-radius: 10px;
-    padding: 20px ;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tạo bóng nhẹ cho card */
-    width: 400px; /* Đặt chiều rộng cho card */
-    height: 400px;
-  }
-  
+}

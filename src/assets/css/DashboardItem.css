@@ -1,0 +1,79 @@
+.block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .block p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    white-space: nowrap;
+  }
+  .block:hover {
+    background-color: #eef5ff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  .block:hover .organization-icon {
+    transform: scale(1.2);
+  }
+  .block:hover .badge-icon {
+    transform: scale(1.2);
+  }
+  .block:hover .titles-icon {
+    transform: scale(1.2);
+  }
+  .block:hover .mission-icon {
+    transform: scale(1.2);
+  }
+  .block:hover .gift-icon {
+    transform: scale(1.2);
+  }
+  .block:hover .shop-icon {
+    transform: scale(1.2);
+  }
+  .organization-icon {
+    font-size: 2rem;
+    color: #cc66cc;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  .badge-icon {
+    font-size: 2rem;
+    color: #ffc107;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  .titles-icon {
+    font-size: 2rem;
+    color: #6f42c1;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  .mission-icon {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  .gift-icon {
+    font-size: 2rem;
+    color: #ff5733;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  .shop-icon {
+    font-size: 2rem;
+    color: #555555;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }

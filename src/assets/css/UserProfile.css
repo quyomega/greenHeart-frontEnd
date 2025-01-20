@@ -1,0 +1,18 @@
+.userInfo {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  height: 14rem;
+  white-space: nowrap;
+}
+.details-link {
+  color: rgb(27, 189, 218);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.details-link:hover {
+  color: rgb(5, 128, 150);
+}
+p{
+    white-space: nowrap;
+}

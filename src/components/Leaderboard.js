@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/css/LeaderBoard.css";
 
 function Leaderboard({ leaderboard, userData }) {
 

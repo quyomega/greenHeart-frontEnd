@@ -1,0 +1,28 @@
+.ranking {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    height: 14rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .ranking-list {
+    max-height: calc(100% - 40px); /* Giới hạn chiều cao của danh sách */
+    overflow-y: auto; /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
+    padding-right: 5px; /* Thêm khoảng cách cho thanh cuộn */
+  }
+  
+  .ranking ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .ranking li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    font-size: 16px;
+  }
+  
+  .ranking li span {
+    display: inline-block;
+  }

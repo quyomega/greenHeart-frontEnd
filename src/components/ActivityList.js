@@ -1,4 +1,5 @@
 import React from "react";
+import "../assets/css/ActivityList.css";
 
 function ActivityList({ dateList, selectedDate, activities, onDateSelect }) {
   const formatDate = (dateString) => {

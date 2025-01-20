@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../assets/css/UserDashboard.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import Header from "../components/Header";
 import UserProfile from "../components/UserProfile";
 import ActivityList from "../components/ActivityList";
 import Leaderboard from "../components/Leaderboard";
@@ -49,33 +50,13 @@ function UserDashboard() {
 
   return (
     <div className="dashboard-container">
-      <header className="dashboard-header header">
-        <h1>UserDashboard</h1>
-        <div className="header-container">
-          <div className="hamburger-btn-container">
-            <button
-              style={{color: "white", border: "none"}}
-              className="hamburger-btn" onClick={toggleLogoutButton}>
-            {isMenuOpen ? "|||" : "☰"} {/* Thay đổi biểu tượng */}
-          </button>
-          </div>
-          {showLogout && ( // Chỉ hiển thị nút đăng xuất khi showLogout là true
-            
-            <div className="logout-btn-container">
-              <button
-                className="details-btn"
-                onClick={goToUserDetails}
-              >Thông tin tài khoản</button>
-              <button
-                className="logout-btn"
-                onClick={handleLogout}
-              >
-                Đăng xuất
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
+      <Header
+        toggleLogoutButton={toggleLogoutButton}
+        isMenuOpen={isMenuOpen}
+        showLogout={showLogout}
+        goToUserDetails={goToUserDetails}
+        handleLogout={handleLogout}
+      />
       <div className="dashboard-content">
         <aside
           className={`dashboard-sidebar ${isMenuCollapsed ? "collapsed" : ""}`}
@@ -84,17 +65,56 @@ function UserDashboard() {
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
             padding: "3px",
             fontSize: "14px",
-            borderRadius: "8px"
+            borderRadius: "8px",
           }}
         >
-          <button className="menu-toggle-btn" onClick={toggleMenu} style={{border: "none", backgroundColor: "transparent", color: "#198363", padding: "3px"}}>
+          <button
+            className="menu-toggle-btn"
+            onClick={toggleMenu}
+            style={{
+              border: "none",
+              backgroundColor: "transparent",
+              color: "#198363",
+              padding: "3px",
+            }}
+          >
             {isMenuCollapsed ? ">" : "<"}
           </button>
-          <ul className={isMenuCollapsed ? "collapsed" : ""} style={{listStyleType: "none", padding: "0", margin: "0"}}>
-            <li style={{padding: "3px 8px", borderBottom: "1px solid #ddd", borderRadius: "4px", marginBottom: "3px"}}>Trang chủ</li>
-            <li style={{padding: "3px 8px", borderBottom: "1px solid #ddd", borderRadius: "4px", marginBottom: "3px"}}>Hoạt động</li>
-            <li style={{padding: "3px 8px", borderBottom: "1px solid #ddd", borderRadius: "4px", marginBottom: "3px"}}>Thông báo</li>
-            <li style={{padding: "3px 8px", borderRadius: "4px"}}>Hỗ trợ</li>
+          <ul
+            className={isMenuCollapsed ? "collapsed" : ""}
+            style={{ listStyleType: "none", padding: "0", margin: "0" }}
+          >
+            <li
+              style={{
+                padding: "3px 8px",
+                borderBottom: "1px solid #ddd",
+                borderRadius: "4px",
+                marginBottom: "3px",
+              }}
+            >
+              Trang chủ
+            </li>
+            <li
+              style={{
+                padding: "3px 8px",
+                borderBottom: "1px solid #ddd",
+                borderRadius: "4px",
+                marginBottom: "3px",
+              }}
+            >
+              Hoạt động
+            </li>
+            <li
+              style={{
+                padding: "3px 8px",
+                borderBottom: "1px solid #ddd",
+                borderRadius: "4px",
+                marginBottom: "3px",
+              }}
+            >
+              Thông báo
+            </li>
+            <li style={{ padding: "3px 8px", borderRadius: "4px" }}>Hỗ trợ</li>
           </ul>
         </aside>
         <main className="dashboard-main">

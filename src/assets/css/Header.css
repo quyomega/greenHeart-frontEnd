@@ -1,0 +1,76 @@
+.dashboard-header {
+  background-color: #28a745 !important;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px;
+  padding: 0 6%;
+}
+.hamburger-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.hamburger-btn:hover {
+  color: #007bff;
+}
+
+.logout-btn-container {
+  position: absolute;
+  top: 60px; /* Đảm bảo xuất hiện ngay dưới header */
+  right: 6%;
+  display: none; /* Mặc định ẩn */
+  flex-direction: column;
+  align-items: flex-start;
+  /* background-color: #35b872; */
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.logout-btn-container.show {
+  display: flex;
+}
+
+.logout-btn,
+.details-btn {
+  width: 100%;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 8px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.details-btn {
+  background-color: #007bff;
+}
+
+.details-btn:hover {
+  background-color: #0056b3;
+}
+.logout-btn:hover {
+  background-color: #d21515;
+}
+.bi-list.rotate-90:before {
+  transform: rotate(90deg);
+  top: -5px;
+}

@@ -8,20 +8,7 @@ p {
   overflow: hidden;
   background-color: #ecf0f1;
   overflow-y: auto;
-}
-.dashboard-header {
-  background-color: #2c3e50;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: 60px;
-  padding: 0 6%;
+  padding: 0px 1px 0px 1px;
 }
 
 .dashboard-content {
@@ -111,230 +98,19 @@ p {
 .dashboard-main .row > div {
   padding: 10px;
 }
-.userInfo {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  height: 14rem;
-  white-space: nowrap;
-}
+
 .row2 {
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
   height: 8rem;
 }
-.userAction {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  height: 14rem;
-  white-space: nowrap;
-}
-.userAction ul{
-  padding-left: 10px;
-}
-.userActionTable{
-  max-height: 45%;
-  overflow-y: auto;
-}
 .dashboard-main.sidebar-collapsed {
   margin-left: 60px;
   border-radius: 10px;
 }
 
-.logout-btn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.logout-btn:hover {
-  background-color: #c0392b;
-}
-
-.details-link {
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.details-link:hover {
-  color: darkblue;
-}
-
-.block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.block p {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  margin: 0;
-  white-space: nowrap;
-}
-.block:hover {
-  background-color: #eef5ff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-.block:hover .organization-icon {
-  transform: scale(1.2);
-}
-.block:hover .badge-icon {
-  transform: scale(1.2);
-}
-.block:hover .titles-icon {
-  transform: scale(1.2);
-}
-.block:hover .mission-icon {
-  transform: scale(1.2);
-}
-.block:hover .gift-icon {
-  transform: scale(1.2);
-}
-.block:hover .shop-icon {
-  transform: scale(1.2);
-}
-.organization-icon {
-  font-size: 2rem;
-  color: #cc66cc;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-.badge-icon {
-  font-size: 2rem;
-  color: #ffc107;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-.titles-icon {
-  font-size: 2rem;
-  color: #6f42c1;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-.mission-icon {
-  font-size: 2rem;
-  color: #007bff;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-.gift-icon {
-  font-size: 2rem;
-  color: #ff5733;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-.shop-icon {
-  font-size: 2rem;
-  color: #555555;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-.ranking {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  height: 14rem;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.ranking-list {
-  max-height: calc(100% - 40px); /* Giới hạn chiều cao của danh sách */
-  overflow-y: auto; /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
-  padding-right: 5px; /* Thêm khoảng cách cho thanh cuộn */
-}
-
-.ranking ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.ranking li {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-  font-size: 16px;
-}
-
-.ranking li span {
-  display: inline-block;
-}
-.listActicityType {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  height: 14rem;
-}
-.listActicityTypeTable {
-  border: 1px;
-  border-radius: 10px;
-  max-height: calc(100% - 40px); /* Giới hạn chiều cao của danh sách */
-  overflow-y: auto; /* Kích hoạt cuộn dọc khi chiều cao vượt quá */
-  padding-right: 0px; /* Thêm khoảng cách cho thanh cuộn */
-}
-.listActicityType ul {
-  padding: 0px;
-  margin: 0px;
-}
-.activityTypeRow {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 16px;
-  border-bottom: 1px solid #ddd;
-}
-
-.activityTypeRow span {
-  flex: 1;
-  text-align: left;
-}
-
-.activityTypeRow span:last-child {
-  text-align: right;
-}
-
-.activityTypeRow.even {
-  background-color: #e9ecef; /* Màu trắng cho hàng chẵn */
-}
-
-.activityTypeRow.odd {
-  background-color: #f9f9f999; /* Màu xám nhẹ cho hàng lẻ */
-}
-
-.activityTypeRow:last-child {
-  border-bottom: none;
-}
-.progressLevel {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  height: 14rem;
-  white-space: nowrap;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.doughnut-chart {
-  align-self: center;
-  max-width: 10rem !important;
-  max-height: 10rem !important;
-  text-align: center;
-  display: block;
-}
-@media (max-width: 1200px) {
-  @media (max-width: 1045px) {
+  @media (max-width: 1100px) {
     .dashboard-main .row-1 {
       flex-direction: column; /* Sắp xếp theo chiều dọc */
     }
@@ -408,71 +184,4 @@ p {
       }
     }
   }
-}
 
-.hamburger-btn-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-  position: absolute;
-  top: 10px;
-  right: 150px;
-}
-
-.hamburger-btn {
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #333;
-  transition: color 0.3s ease;
-}
-
-.hamburger-btn:hover {
-  color: #007bff;
-}
-
-.logout-btn-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 120px;  
-}
-
-.logout-btn,
-.details-btn {
-  width: 100%;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-bottom: 0;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logout-btn:hover {
-  background-color: #c82333;
-}
-
-.details-btn {
-  background-color: #007bff;
-}
-
-.details-btn:hover {
-  background-color: #0056b3;
-}
-
-.show-logout {
-  display: block;
-}
-.style-wirting {
-  color: #531414;
-  font-size: 16px;
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
-}

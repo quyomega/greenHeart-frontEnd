@@ -21,7 +21,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <div className="login-left">
+      <div className="col-6 login-left">
         <div className="slogan">
           <p>Dự án trái tim xanh</p>
           <p>Kết nối với cộng đồng</p>
@@ -29,7 +29,7 @@ function Login() {
         </div>
       </div>
 
-      <div className="login-right">
+      <div className="col-6 login-right">
         <div className="card shadow-sm p-4">
           <h2 className="text-center mb-4">Đăng nhập</h2>
           {error && <p style={{ color: "red" }}>{error}</p>}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../assets/css/UserDashboard.css";
+import "../assets/css/UserProfile.css";
 
 function UserProfile({ userData }) {
   const navigate = useNavigate();
