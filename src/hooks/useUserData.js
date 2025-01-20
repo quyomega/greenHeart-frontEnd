@@ -4,10 +4,12 @@ import {
   fetchActivities,
   fetchLeaderboard,
   fetchActivityTypes,
+  getAllUser,
 } from "../services/userService";
 
 const useUserData = (token, filter) => {
   const [userData, setUserData] = useState(null);
+  const [allUsers,setAllUsers] = useState([]);
   const [activities, setActivities] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [activityTypes, setActivityTypes] = useState([]);
@@ -21,12 +23,17 @@ const useUserData = (token, filter) => {
         if (!token) {
           throw new Error("Token không hợp lệ.");
         }
+        //lấy token
+        // console.log(token);
 
         // Lấy dữ liệu người dùng
         const user = await fetchUserData(token);
         setUserData(user);
-        //lấy token
-        // console.log(token);
+        
+        // Lấy dữ liệu tất cả người dùng
+        const users = await getAllUser(token);
+        setAllUsers(users);
+        
         // Tính toán tiến độ cấp độ
         const nextLevelPoints = (user.level + 1) * 100 - user.totalPoints;
         setLevelProgress(100 - nextLevelPoints);
@@ -52,17 +59,18 @@ const useUserData = (token, filter) => {
         // Lấy danh sách loại hoạt động
         const activityTypesData = await fetchActivityTypes();
         setActivityTypes(activityTypesData);
+
       } catch (error) {
         console.error("Lỗi khi tải dữ liệu:", error);
         setError(error.message || "Đã xảy ra lỗi khi tải dữ liệu.");
       }
     };
-
     loadData();
   }, [token, filter]);
-
+  
   return {
     userData,
+    allUsers,
     activities,
     leaderboard,
     activityTypes,

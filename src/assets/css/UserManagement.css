@@ -1,0 +1,75 @@
+.manager-member-container {
+  font-family: "Arial", sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ cho bảng */
+  border-radius: 10px; /* Bo tròn góc bảng */
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+  font-size: 14px; /* Cải thiện kích thước chữ */
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+  font-weight: 600; /* Đậm cho tiêu đề */
+  letter-spacing: 1px; /* Thêm khoảng cách giữa các chữ cái */
+}
+
+td {
+  background-color: #ffffff;
+}
+
+tr:nth-child(even) td {
+  background-color: #f1f1f1; /* Dòng chẵn có màu nền khác */
+}
+
+tr:hover td {
+  background-color: #f1f1f1; /* Màu nền khi hover */
+  cursor: pointer;
+}
+
+.admin-role {
+  color: #ff5733; /* Màu đỏ nhạt cho vai trò admin */
+  font-weight: bold;
+}
+
+.user-role {
+  color: #28a745; /* Màu xanh lá cho người dùng */
+  font-weight: bold;
+
+}
+
+.title {
+  white-space: nowrap; /* Đảm bảo không bị cắt bớt văn bản */
+  font-weight: 500;
+  font-weight: bold;
+}
+
+table caption {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  padding: 10px;
+}
+
+/* @media screen and (max-width: 768px) {
+    table {
+      font-size: 12px; 
+    }
+  
+    th,
+    td {
+      padding: 8px 10px;
+    }
+  } */
