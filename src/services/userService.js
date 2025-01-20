@@ -34,7 +34,7 @@ export const getAllUser = async (token) => {
     const response = await axios.get(`${API_BASE_URL}/users/allprofile`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.data.users; 
+    return response.data.users;
   } catch (error) {
     console.error("Có lỗi xảy ra khi lấy dữ liệu tất cả người dùng:", error);
     throw error;
@@ -44,4 +44,20 @@ export const getAllUser = async (token) => {
 export const fetchActivityTypes = async () => {
   const response = await axios.get(`${API_BASE_URL}/activitytype/get-list`);
   return response.data.data || [];
+};
+// API ghi nhận hoạt động xanh
+export const recordActivity = async (token, activityData) => {
+  try {
+    const response = axios.post(
+      `${API_BASE_URL}/activities/record`,
+      activityData,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Có lỗi xảy ra khi ghi nhận hoạt động:", error);
+    throw error;
+  }
 };

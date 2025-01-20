@@ -5,11 +5,12 @@ import {
   fetchLeaderboard,
   fetchActivityTypes,
   getAllUser,
+  recordActivity,
 } from "../services/userService";
 
 const useUserData = (token, filter) => {
   const [userData, setUserData] = useState(null);
-  const [allUsers,setAllUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [activities, setActivities] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
   const [activityTypes, setActivityTypes] = useState([]);
@@ -17,32 +18,43 @@ const useUserData = (token, filter) => {
   const [dateList, setDateList] = useState([]);
   const [error, setError] = useState(null);
 
+  const handleRecordActivity = async (token, activityData) => {
+    try {
+      const result = await recordActivity(token, activityData);
+      // Sau khi ghi nhận thành công, cập nhật lại danh sách hoạt động và điểm người dùng
+      const updatedActivities = await fetchActivities(token);
+      setActivities(updatedActivities);
+
+      const updatedUser = await fetchUserData(token);
+      setUserData(updatedUser);
+
+      console.log("Hoạt động ghi nhận thành công:", result);
+      return result;
+    } catch (error) {
+      console.error("Ghi nhận hoạt động thất bại:", error);
+      throw error;
+    }
+  };
+
   useEffect(() => {
     const loadData = async () => {
       try {
         if (!token) {
           throw new Error("Token không hợp lệ.");
         }
-        //lấy token
-        // console.log(token);
 
-        // Lấy dữ liệu người dùng
         const user = await fetchUserData(token);
         setUserData(user);
-        
-        // Lấy dữ liệu tất cả người dùng
+
         const users = await getAllUser(token);
         setAllUsers(users);
-        
-        // Tính toán tiến độ cấp độ
+
         const nextLevelPoints = (user.level + 1) * 100 - user.totalPoints;
         setLevelProgress(100 - nextLevelPoints);
 
-        // Lấy danh sách hoạt động
         const activitiesData = await fetchActivities(token);
         setActivities(activitiesData);
 
-        // Lấy danh sách ngày duy nhất từ hoạt động
         const uniqueDates = [
           ...new Set(
             activitiesData.map((activity) =>
@@ -52,11 +64,9 @@ const useUserData = (token, filter) => {
         ];
         setDateList(uniqueDates);
 
-        // Lấy bảng xếp hạng
         const leaderboardData = await fetchLeaderboard(token, filter);
         setLeaderboard(leaderboardData);
 
-        // Lấy danh sách loại hoạt động
         const activityTypesData = await fetchActivityTypes();
         setActivityTypes(activityTypesData);
 
@@ -67,7 +77,7 @@ const useUserData = (token, filter) => {
     };
     loadData();
   }, [token, filter]);
-  
+
   return {
     userData,
     allUsers,
@@ -77,6 +87,7 @@ const useUserData = (token, filter) => {
     levelProgress,
     dateList,
     error,
+    handleRecordActivity, 
   };
 };
 

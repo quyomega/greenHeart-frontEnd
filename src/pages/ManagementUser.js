@@ -22,7 +22,7 @@ function ManagementUser({ token }) {
               <th className="title">Địa chỉ</th>
               <th className="title">Vai trò</th>
               <th className="title">Điểm</th>
-              <th className="title">Tổng điểm</th>
+              <th className="title">Cấp độ</th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +42,7 @@ function ManagementUser({ token }) {
                   )}
                 </td>
                 <td>{user.points}</td>
-                <td>{user.totalPoints}</td>
+                <td>{user.level}</td>
               </tr>
             ))}
           </tbody>

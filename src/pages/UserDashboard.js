@@ -8,6 +8,7 @@ import Leaderboard from "../components/Leaderboard";
 import ActivityTypes from "../components/ActivityTypes";
 import ProgressLevel from "../components/ProgressLevel";
 import DashboardItem from "../components/DashboardItem";
+import ActivityRecordModal from "../components/ActivityRecordModal";
 import useUserData from "../hooks/useUserData";
 import { useNavigate } from "react-router-dom";
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -17,6 +18,7 @@ function UserDashboard() {
   const [filter] = useState("system");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
+  const [showActivityModal, setShowActivityModal] = useState(false);
   const token = localStorage.getItem("token");
   const {
     userData,
@@ -25,6 +27,7 @@ function UserDashboard() {
     activityTypes,
     levelProgress,
     dateList,
+    handleRecordActivity,
   } = useUserData(token, filter);
 
   const navigate = useNavigate();
@@ -46,7 +49,20 @@ function UserDashboard() {
   const goToUserDetails = () => {
     navigate("/user-details");
   };
-
+  const toggleActivityModal = () => {
+    setShowActivityModal(!showActivityModal);
+  };
+  const handleActivityModalSubmit = async (activityData) => {
+    try {
+      await handleRecordActivity(token, activityData); // Gửi dữ liệu đã qua kiểm tra
+      setShowActivityModal(false); // Đóng modal
+      alert("Ghi nhận hoạt động thành công!");
+    } catch (error) {
+      console.error("Lỗi khi ghi nhận hoạt động:", error);
+      alert("Lỗi khi ghi nhận hoạt động. Vui lòng thử lại.");
+    }
+  };
+  
   return (
     <div className="dashboard-container">
       <Header
@@ -190,7 +206,18 @@ function UserDashboard() {
             <p>Đang tải dữ liệu...</p>
           )}
         </main>
+        <div className="activity-record" onClick={toggleActivityModal}>
+          <i className="bi bi-heart-fill green-heart"></i>
+        </div>
       </div>
+      {/* Bảng chọn ghi nhận hoạt động xanh */}
+      <ActivityRecordModal
+        userData={userData}
+        activityTypes={activityTypes}
+        isOpen={showActivityModal}
+        onClose={() => setShowActivityModal(false)}
+        onSubmit={handleActivityModalSubmit}
+      />
     </div>
   );
 }
