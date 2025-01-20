@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth.js"; 
+import { useAuth } from "../hooks/useAuth.js";
 import '../assets/css/Login.css';
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { error, login } = useAuth();
-  const navigate = useNavigate();
+  const { error, handleLoginSubmit } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,23 +14,9 @@ function Login() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const { token, role } = await login(formData);
-      if (!token || !role) return;
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-
-      if (role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/user");
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    handleLoginSubmit(formData);  
   };
 
   return (

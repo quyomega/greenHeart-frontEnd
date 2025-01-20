@@ -5,13 +5,14 @@ import useOrganizations from "../hooks/useOrganizations";
 import "../assets/css/Organizations.css";
 
 function Organizations() {
-  const { organizations, error, successMessage, createOrganization } = useOrganizations();
+  const { organizations, error, successMessage, createNewOrganization } = useOrganizations();
   const [newOrganizationName, setNewOrganizationName] = useState("");
   const [newOrganizationDescription, setNewOrganizationDescription] = useState("");
 
   const handleCreateOrganization = () => {
-    createOrganization(newOrganizationName, newOrganizationDescription);
+    createNewOrganization(newOrganizationName, newOrganizationDescription); 
   };
+
   return (
     <div className="organizations-container">
       <h1>Tổ chức của bạn</h1>

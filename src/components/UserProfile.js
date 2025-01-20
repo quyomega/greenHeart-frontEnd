@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "../assets/css/UserDashboard.css";
 
 function UserProfile({ userData }) {
-  // console.log("userData", userData);
   const navigate = useNavigate();
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
 

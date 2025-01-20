@@ -13,7 +13,12 @@ const useOrganizationDetails = (orgId) => {
     const getOrganizationDetails = async () => {
       try {
         const data = await fetchOrganizationDetails(orgId);
-        setOrganization(data);
+        // console.log("Dữ liệu API data:", data); 
+        if (data) { 
+          setOrganization(data);  
+        } else {
+          setError("Không có thông tin tổ chức.");
+        }
       } catch (error) {
         console.error("Lỗi khi lấy chi tiết tổ chức:", error);
         setError("Không thể tải thông tin tổ chức. Vui lòng thử lại.");
@@ -42,8 +47,6 @@ const useOrganizationDetails = (orgId) => {
     try {
       await removeMember(orgId, memberId);
       setDeleteSuccessMessage("Đã xóa thành viên khỏi tổ chức!");
-
-      // Cập nhật lại danh sách thành viên sau khi xóa
       const updatedOrganization = { ...organization };
       updatedOrganization.members = updatedOrganization.members.filter(
         (member) => member._id !== memberId

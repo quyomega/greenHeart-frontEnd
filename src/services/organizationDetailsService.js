@@ -1,15 +1,22 @@
 import axios from "axios";
 import { API_BASE_URL } from "../constants";
+
 // lấy thông tin chi tiết của tổ chức
 const fetchOrganizationDetails = async (orgId) => {
   const token = localStorage.getItem("token");
-  const response = await axios.get(
-    `${API_BASE_URL}/organizations/${orgId}`,
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-  return response.data.data;
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/organizations/${orgId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    // console.log("API Response:", response); 
+    return response.data;  
+  } catch (error) {
+    console.error("Lỗi khi gọi API:", error);
+    throw new Error("Không thể lấy dữ liệu tổ chức");
+  }
 };
 // thêm thành viên vào tổ chức
 const addMember = async (orgId, memberCode) => {
@@ -25,7 +32,7 @@ const addMember = async (orgId, memberCode) => {
     }
   );
 };
-
+// xóa thành viên tổ chức
 const removeMember = async (orgId, memberId) => {
   const token = localStorage.getItem("token");
   await axios.post(
